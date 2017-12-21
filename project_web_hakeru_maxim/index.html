@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+	
+		<style>
+			#renderCanvas{
+				display:none;
+			}
+		</style>
+	
+	
+		<!-- <script type="text/javascript" src="_js/cards_of_demons_and_gods.js"></script> -->
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+		<link href="_style/style.css" rel="stylesheet" type="text/css">
+		
+		
+		<script type="text/javascript" src="_js/angular.js"></script>
+		
+		
+		
+		<!--<script type="text/javascript" src="_js/jquery-3.2.1.min.js"></script>-->
+		
+		
+		<!--  Nuke Engine scripts -->
+		<script type="text/javascript" src="_js/ne/game_board.js"></script>
+		<script type="text/javascript" src="_js/ne/canvas_utils.js"></script>
+		<script type="text/javascript" src="_js/ne/initialization.js"></script>
+		<script type="text/javascript">
+		
+			var particles = [];
+			var timer = 0
+			
+			
+			
+			var app = angular.module('game-app',[]);
+			var control = app.controller('game-control',function($scope){
+			
+			
+				init();
+				$scope.titleSrc = "_resources/game_title.png";
+				
+				$scope.titleWidth = window.innerWidth+"px";
+				
+				setInterval(function(){
+					
+					
+					focusedPanel.paint();
+					
+				
+				},35);
+				
+			});
+			
+			
+			
+			
+			function init(){
+			
+				initResourceManager();
+				initCanvas();
+				initPanelButtons();
+				//fullscreen(gameCanvasAdapted,function(){console.log("game started")});
+				
+				
+				setInterval(function(){
+					howerCharacterAnimation.next();
+					mainPanel.paint();
+					
+					
+				},30);
+				
+				
+			}
+				
+		</script>
+	</head>
+	<body ng-app="game-app" ng-controller="game-control">
+	<img src="{{titleSrc}}" style="width:{{titleWidth}};" class="game-title">
+	<input type="button" id="startBtn" value="start game" onclick="fullscreen(gameCanvasAdapted,function(){console.log('game started')});">
+	<input type="button" id="registerBtn" value="register">
+	<canvas id="renderCanvas"></canvas>
+	</body>
+</html>
+
+
+
+
